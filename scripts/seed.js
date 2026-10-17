@@ -9,7 +9,7 @@ const api = (path, body) =>
 (async () => {
   const cats = {};
   for (const name of ['Electronics', 'Books', 'Clothing']) {
-    const r = await api('categories', { name, description: `${name} category` });
+    const r = await api('categories', { name, slug: name.toLowerCase(), description: `${name} category` });
     cats[name] = r.category && r.category._id;
     console.log('category', name, cats[name] || r);
   }

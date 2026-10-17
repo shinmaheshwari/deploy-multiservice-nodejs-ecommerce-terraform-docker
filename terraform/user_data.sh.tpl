@@ -18,6 +18,9 @@ docker network create ecom || true
 docker run -d --name mongo --restart always --network ecom \
   -v mongo-data:/data/db mongo:6.0
 
+# Wait until MongoDB accepts connections before starting the services
+until docker exec mongo mongosh --quiet --eval "db.adminCommand('ping')" >/dev/null 2>&1; do sleep 3; done
+
 # Backend services
 docker run -d --name user-service --restart always --network ecom \
   -e PORT=3001 -e MONGODB_URI=mongodb://mongo:27017/ecommerce_users -e JWT_SECRET='${jwt_secret}' \
