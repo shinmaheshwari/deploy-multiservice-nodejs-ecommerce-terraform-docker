@@ -1,0 +1,4 @@
+dockerhub_username = "your-dockerhub-username"
+jwt_secret         = "use-a-long-random-string"
+# ssh_cidr         = "203.0.113.10/32"   # your IP only
+# instance_type    = "t3.small"
